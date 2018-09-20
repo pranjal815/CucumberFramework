@@ -1,10 +1,29 @@
 package CucumberFramework.steps;
 
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 public class LoginSteps {
+	
+	WebDriver driver;
+	
+	@Before()
+	public void setup() {
+		//windows execution
+		//System.setProperty("webdriver.gecko.driver", "Users/bl/eclipse-workspace/CucumberAutomation/CucumberFramework/src/test/java/CucumberFramework/resources/geckodriver.exe");
+		//mac execution
+		System.setProperty("webdriver.gecko.driver", "Users/bl/eclipse-workspace/CucumberAutomation/CucumberFramework/src/test/java/CucumberFramework/resources/geckodriver");
+		this.driver = new FirefoxDriver();
+		this.driver.manage().window().maximize();
+		this.driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
+	}
 	
 	@Given("^Users navigate to StackOverflow website$")
 	public void users_navigate_to_StackOverflow_website() throws Throwable {
